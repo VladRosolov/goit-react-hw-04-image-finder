@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ToastContainer } from 'react-toastify';
 import { Audio } from 'react-loader-spinner';
 import { Button } from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
@@ -89,8 +88,6 @@ export default class App extends Component {
             ariaLabel="loading"
           />
         )}
-
-        <ToastContainer autoClose={3000} />
       </div>
     );
   }
