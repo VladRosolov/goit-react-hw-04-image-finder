@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import css from './Searchbar.module.css';
-import { toast } from 'react-toastify';
 import { FcSearch } from 'react-icons/fc';
 
 export default class Searchbar extends Component {
@@ -16,10 +16,9 @@ export default class Searchbar extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.value.trim() === '') {
-      return toast.error('Please enter a request! ');
+      return toast('Please enter a request!');
     }
     this.props.onSubmit(this.state.value);
-    this.setState({ value: '' });
   };
 
   render() {

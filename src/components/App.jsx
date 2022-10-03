@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { Audio } from 'react-loader-spinner';
 import { Button } from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import Searchbar from './Searchbar/Searchbar';
-import { ToastContainer } from 'react-toastify';
 import Modal from './Modal/Modal';
 import { ApiService } from '../services/ApiService';
 
@@ -42,7 +42,7 @@ export default class App extends Component {
 
   handleFormSubmit = value => {
     console.log(value);
-    this.setState({ value, per_page: 12, pictures: [] });
+    this.setState({ value, per_page: 12 });
   };
 
   loadMore = () => {
@@ -73,6 +73,13 @@ export default class App extends Component {
         {showModal && (
           <Modal picture={this.state.picture} onClose={this.closeModal} />
         )}
+
+        {error && <p>ОЙ, что-то пошло не так..</p>}
+        <Searchbar onSubmit={this.handleFormSubmit} />
+        {isPictures && (
+          <ImageGallery pictures={pictures} onClick={this.openModal} />
+        )}
+        {isPictures && <Button onClick={this.loadMore} />}
         {loading && (
           <Audio
             height="80"
@@ -82,24 +89,8 @@ export default class App extends Component {
             ariaLabel="loading"
           />
         )}
-        {error && <p>ОЙ, что-то пошло не так..</p>}
-        <Searchbar onSubmit={this.handleFormSubmit} />
-        {isPictures && (
-          <ImageGallery pictures={pictures} onClick={this.openModal} />
-        )}
-        {isPictures && <Button onClick={this.loadMore} />}
 
-        <ToastContainer
-          position="top-center"
-          autoClose={2000}
-          hideProgressBar
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+        <ToastContainer autoClose={3000} />
       </div>
     );
   }
